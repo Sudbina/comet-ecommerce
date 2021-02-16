@@ -28,7 +28,7 @@ const ProductScreen = ({ match }) => {
         <Col md={3}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              <h2>{product.name}</h2>
+              <h2 style={{ fontWeight: '600' }}>{product.name}</h2>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
@@ -55,9 +55,10 @@ const ProductScreen = ({ match }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Status:</Col>
                   <Col>
-                    {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                    {product.countInStock > 0
+                      ? `${product.countInStock} in stock`
+                      : 'Out of Stock'}
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -67,7 +68,7 @@ const ProductScreen = ({ match }) => {
                   type='button'
                   disabled={product.countInStock === 0}
                 >
-                  Add to Cart
+                  {product.countInStock > 0 ? 'Add To Cart' : 'Out of Stock'}
                 </Button>
               </ListGroup.Item>
             </ListGroup>
