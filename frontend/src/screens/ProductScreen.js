@@ -9,18 +9,23 @@ import {
   Card,
   Button,
   Form,
+  Popover,
+  OverlayTrigger,
+  Toast,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 
 const ProductScreen = ({ match, history }) => {
   const [quantity, setQuantity] = useState(1);
+  const [hasAddedToCart, displayCart] = useState(false);
 
   const dispatch = useDispatch();
-
   const productDetails = useSelector((state) => state.productDetails);
+
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
@@ -29,7 +34,9 @@ const ProductScreen = ({ match, history }) => {
 
   const handleAddToCart = () => {
     console.log('Adding item to cart: ', { name: product.name, qty: quantity });
-    history.push(`/cart/${match.params.id}?qty=${quantity}`);
+    // history.push(`/cart/${match.params.id}?qty=${quantity}`);
+    dispatch(addToCart(match.params.id, quantity));
+    displayCart(!hasAddedToCart);
   };
 
   return (
@@ -121,6 +128,55 @@ const ProductScreen = ({ match, history }) => {
               </Card>
             </Col>
           </Row>
+          <Toast
+            style={{
+              position: 'absolute',
+              top: 20,
+              right: 20,
+              borderRadius: 5,
+            }}
+            delay={50000}
+            onClose={() => displayCart(false)}
+            show={hasAddedToCart}
+            autohide
+          >
+            <Toast.Header style={{ borderRadius: 5 }}>
+              <strong className='mr-auto'>Added to cart</strong>
+              <small>just now</small>
+            </Toast.Header>
+            <Toast.Body>
+              <Row>
+                <Col md={3} style={{ position: 'relative' }}>
+                  <Image src={product.image} fluid />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 55,
+                      top: 27,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    x{quantity}
+                  </span>
+                </Col>
+                <Col>{product.name}</Col>
+                <Col
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    marginRight: 5,
+                  }}
+                >
+                  <Link to='/cart'>
+                    <Button style={{ borderRadius: 2 }} size='sm'>
+                      View
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            </Toast.Body>
+          </Toast>
         </>
       )}
     </>
