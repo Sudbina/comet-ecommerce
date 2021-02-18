@@ -135,7 +135,7 @@ const ProductScreen = ({ match, history }) => {
               right: 20,
               borderRadius: 5,
             }}
-            delay={50000}
+            delay={5000}
             onClose={() => displayCart(false)}
             show={hasAddedToCart}
             autohide
