@@ -33,9 +33,10 @@ const ProductScreen = ({ match, history }) => {
   }, [dispatch, match]);
 
   const handleAddToCart = () => {
+    let qty = Number(quantity);
     console.log('Adding item to cart: ', { name: product.name, qty: quantity });
     // history.push(`/cart/${match.params.id}?qty=${quantity}`);
-    dispatch(addToCart(match.params.id, quantity));
+    dispatch(addToCart(match.params.id, qty));
     displayCart(!hasAddedToCart);
   };
 
