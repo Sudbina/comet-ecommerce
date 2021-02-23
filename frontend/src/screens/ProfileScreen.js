@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Tab, Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -11,14 +11,17 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const [show, setShow] = useState(false);
 
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
   const userLogin = useSelector((state) => state.userLogin);
+  const userUpdate = useSelector((state) => state.userUpdate);
 
   const { loading, error, user } = userDetails;
   const { userInfo } = userLogin;
+  const { success } = userUpdate;
 
   useEffect(() => {
     if (!userInfo) {
@@ -38,9 +41,16 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmedPassword) {
       setMessage('Passwords do not match');
     } else {
-      console.log('handle update');
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      setShow(true);
     }
   };
+
+  if (show) {
+    setTimeout(() => {
+      setShow(false);
+    }, 6000);
+  }
 
   return (
     <Col>
@@ -62,7 +72,10 @@ const ProfileScreen = ({ location, history }) => {
           <Col sm={9}>
             <Tab.Content>
               <Tab.Pane eventKey='first'>
-              <h2>Update Profile</h2>
+                <Message variant='success' show={show}>
+                  Profile Updated
+                </Message>
+                <h2>Update Profile</h2>
                 <Form onSubmit={handleUpdate}>
                   <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>

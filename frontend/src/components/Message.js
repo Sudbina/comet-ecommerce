@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-const Message = ({ variant, children, hasRefresh }) => {
+const Message = ({ variant, children, hasRefresh, show }) => {
   const history = useHistory();
 
   const handleRefresh = () => {
@@ -10,7 +10,11 @@ const Message = ({ variant, children, hasRefresh }) => {
   };
 
   return (
-    <Alert style={{ display: 'flex', alignItems: 'center' }} variant={variant}>
+    <Alert
+      style={{ display: 'flex', alignItems: 'center' }}
+      variant={variant}
+      show={show}
+    >
       {children}
       {hasRefresh && (
         <Button
