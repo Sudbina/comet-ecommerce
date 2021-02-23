@@ -44,7 +44,6 @@ const ProfileScreen = ({ location, history }) => {
 
   return (
     <Col>
-      <h1>Your Profile</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
@@ -63,6 +62,7 @@ const ProfileScreen = ({ location, history }) => {
           <Col sm={9}>
             <Tab.Content>
               <Tab.Pane eventKey='first'>
+              <h2>Update Profile</h2>
                 <Form onSubmit={handleUpdate}>
                   <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>
