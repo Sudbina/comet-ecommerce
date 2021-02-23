@@ -61,7 +61,7 @@ const ProductScreen = ({ match, history }) => {
             <Col md={5}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h2>${product.price}</h2>
+                  <h2>£{product.price}</h2>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
@@ -79,7 +79,7 @@ const ProductScreen = ({ match, history }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>£{product.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
