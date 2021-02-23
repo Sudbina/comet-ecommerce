@@ -9,8 +9,6 @@ import {
   Card,
   Button,
   Form,
-  Popover,
-  OverlayTrigger,
   Toast,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
@@ -42,32 +40,34 @@ const ProductScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link className='btn btn-light my-2' to='/'>
-        Back
-      </Link>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant='danger' hasRefresh>
+          {error}
+        </Message>
       ) : (
         <>
+          <Link className='btn btn-light my-2' to='/'>
+            Back
+          </Link>
+          <h2 style={{ fontWeight: '600', marginBottom: 20 }}>
+            {product.name}
+          </h2>
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={3}>
+            <Col md={5}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h2 style={{ fontWeight: '600' }}>{product.name}</h2>
+                  <h2>${product.price}</h2>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
                   />
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <h2>${product.price}</h2>
                 </ListGroup.Item>
                 <ListGroup.Item>{product.description}</ListGroup.Item>
               </ListGroup>
