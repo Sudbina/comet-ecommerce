@@ -20,7 +20,27 @@ const Product = ({ product }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text>
-        <Card.Text as='h3'>£{product.price}</Card.Text>
+        <Card.Text as='h4'>
+          £
+          {product.onSale ? (
+            <>
+              <span
+                style={{
+                  color: 'rgba(0,0,0,0.5)',
+                  fontWeight: 400,
+                  textDecoration: 'line-through',
+                }}
+              >
+                {product.price}
+              </span>
+              <span style={{ color: 'red', fontWeight: 700, marginLeft: 10 }}>
+                {product.salePrice}
+              </span>
+            </>
+          ) : (
+            product.price
+          )}
+        </Card.Text>
       </Card.Body>
     </Card>
   );

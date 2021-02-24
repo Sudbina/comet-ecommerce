@@ -61,7 +61,33 @@ const ProductScreen = ({ match, history }) => {
             <Col md={5}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h2>£{product.price}</h2>
+                  <h2>
+                    £
+                    {product.onSale ? (
+                      <>
+                        <span
+                          style={{
+                            color: 'rgba(0,0,0,0.5)',
+                            fontWeight: 400,
+                            textDecoration: 'line-through',
+                          }}
+                        >
+                          {product.price}
+                        </span>
+                        <span
+                          style={{
+                            color: 'red',
+                            fontWeight: 700,
+                            marginLeft: 10,
+                          }}
+                        >
+                          {product.salePrice}
+                        </span>
+                      </>
+                    ) : (
+                      product.price
+                    )}
+                  </h2>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
@@ -79,7 +105,7 @@ const ProductScreen = ({ match, history }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>£{product.price}</strong>
+                        {product.onSale ? product.salePrice : product.price}
                       </Col>
                     </Row>
                   </ListGroup.Item>

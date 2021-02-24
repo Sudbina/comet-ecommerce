@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,9 @@ import { logout } from '../actions/userActions';
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
+  const cart = useSelector((state) => state.cart);
   const { userInfo } = userLogin;
+  const { cartItems } = cart;
 
   const dispatch = useDispatch();
 
@@ -28,6 +30,11 @@ const Header = () => {
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i> Cart
+                  {cartItems.length > 0 && (
+                    <Badge className='mx-1' pill variant='primary'>
+                      {cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+                    </Badge>
+                  )}
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
