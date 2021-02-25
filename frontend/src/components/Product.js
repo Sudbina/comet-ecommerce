@@ -20,8 +20,7 @@ const Product = ({ product }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text>
-        <Card.Text as='h4'>
-          £
+        <Card.Text className='cashFontLarge' as='h4'>
           {product.onSale ? (
             <>
               <span
@@ -31,14 +30,14 @@ const Product = ({ product }) => {
                   textDecoration: 'line-through',
                 }}
               >
-                {product.price}
+                £{product.price}
               </span>
               <span style={{ color: 'red', fontWeight: 700, marginLeft: 10 }}>
-                {product.salePrice}
+                £{product.salePrice}
               </span>
             </>
           ) : (
-            product.price
+            `£${product.price}`
           )}
         </Card.Text>
       </Card.Body>

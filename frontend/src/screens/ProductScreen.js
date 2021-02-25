@@ -61,8 +61,7 @@ const ProductScreen = ({ match, history }) => {
             <Col md={5}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h2>
-                    £
+                  <h2 style={{ fontSize: 36 }} className='cashFontLarge'>
                     {product.onSale ? (
                       <>
                         <span
@@ -72,7 +71,7 @@ const ProductScreen = ({ match, history }) => {
                             textDecoration: 'line-through',
                           }}
                         >
-                          {product.price}
+                          £{product.price}
                         </span>
                         <span
                           style={{
@@ -81,7 +80,7 @@ const ProductScreen = ({ match, history }) => {
                             marginLeft: 10,
                           }}
                         >
-                          {product.salePrice}
+                          £{product.salePrice}
                         </span>
                       </>
                     ) : (

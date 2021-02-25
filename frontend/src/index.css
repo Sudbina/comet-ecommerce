@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Challenge;
+  src: url('../src/fonts/Challenge\ Bold\ Std\ Regular.otf');
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +21,15 @@ h6 {
 
 main {
   min-height: 80vh;
+}
+
+.cashFont {
+  font-family: Challenge;
+}
+
+.cashFontLarge {
+  font-family: Challenge;
+  font-size: 32px;
 }
 
 .rating span {
